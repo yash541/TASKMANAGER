@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import javax.naming.directory.SearchResult;
+import java.util.*;
+import java.util.regex.Pattern;
 
 @Service
 public class TaskService {
@@ -92,11 +92,25 @@ public class TaskService {
 //        Long userId, Long categoryId, Date fromDate, Date toDate, String status, String priority
         PriorityEntity Specificpriority=priorityRepository.findByName(priority);
         StatusEntity specificstatus=statusRepository.findByName(status);
-        Optional<CategoryNamesEntity> specificcategory = categoryNamesRepository.findByName(category);
+        if(category.equals("ALL")){
+            Specification<TasksEntity> filterSpecification= TasksQuery.buildSpecification(user,
+                    Specificpriority,
+                    specificstatus,
+                    null,
+                    fromdate,
+                    todate,
+                    sort,
+                    pageNum);
+            List<TasksEntity> tasks = taskRepository.findAll(filterSpecification);
+            tasks=TasksQuery.sortTasks(tasks, String.valueOf(sort));
+            tasks=TasksQuery.paginateTasks(tasks,pageNum,9);
+            return tasks;
+        }
+       CategoryNamesEntity specificcategory = categoryNamesRepository.findByNameAndUser(category,user);
         Specification<TasksEntity> filterSpecification= TasksQuery.buildSpecification(user,
                                                                                         Specificpriority,
                                                                                         specificstatus,
-                                                                                        specificcategory.get(),
+                                                                                        specificcategory,
                                                                                         fromdate,
                                                                                         todate,
                                                                                         sort,
@@ -114,10 +128,10 @@ public class TaskService {
     public TasksEntity createTask(TaskDTO taskDTO,UsersEntity user) {
         // Create a TaskEntity object from the TaskDTO
         String categoryname=taskDTO.getCategory();
-        Optional<CategoryNamesEntity> category=categoryNamesRepository.findByName(categoryname);
+        CategoryNamesEntity category=categoryNamesRepository.findByNameAndUser(categoryname,user);
         TasksEntity taskEntity = new TasksEntity();
         taskEntity.setUser(user);
-        taskEntity.setCategory(category.get());
+        taskEntity.setCategory(category);
 
         // Set other properties from taskDTO
         taskEntity.setTitle(taskDTO.getTitle());
@@ -155,7 +169,7 @@ public class TaskService {
 
             // Update only the fields that are present in the request body
             BeanUtils.copyProperties(task, existingTask, "id");
-
+            existingTask.setUpdatedat(new Date());
             TasksEntity savedTask = taskRepository.save(existingTask);
             // Set other fields as needed
             return taskRepository.save(existingTask);
@@ -190,8 +204,23 @@ public class TaskService {
         StatusEntity completeStatus=statusRepository.findByName("COMPLETED");
         retrivedTask.setStatus(completeStatus);
         retrivedTask.setCompletedAt(new Date());
+        retrivedTask.setUpdatedat(new Date());
         TasksEntity updatedTask = taskRepository.save(retrivedTask);
         return updatedTask;
+    }
+
+    public List<TasksEntity> search(UsersEntity user, String query) {
+        List<TasksEntity> tasks = taskRepository.findByUser(user);
+        // Use regex pattern to match titles and categories
+        List<TasksEntity> results = new ArrayList<>();
+        Pattern pattern = Pattern.compile(query, Pattern.CASE_INSENSITIVE);
+
+        for (TasksEntity task : tasks) {
+            if (pattern.matcher(task.getTitle()).find() || pattern.matcher(task.getCategory().getName()).find()) {
+                results.add(task);
+            }
+        }
+        return results;
     }
 }
 

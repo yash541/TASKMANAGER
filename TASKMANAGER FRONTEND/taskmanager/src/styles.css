@@ -1,0 +1,192 @@
+/* styles.css */
+
+.landing-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .left-buttons,
+  .right-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  .sidebar-buttons{
+    display: flex;
+    gap: 70px;
+    background-color: #f2f2f2;
+  }
+  
+  .button:hover {
+    background-color: hsl(208, 94%, 49%);
+  }
+  .button-section {
+    display: flex;
+    justify-content: space-between;
+  }
+  .dropdown-container {
+    margin-left: 20px;
+    background-color:#fff;
+  }
+
+  
+  .task-item {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox-column {
+    flex: 0 0 auto;
+    padding: 10px,10px;
+  }
+  
+  .task-data-column {
+    flex: 1 1 auto;
+  }
+  
+  .task-info {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+  }
+  
+  .additional-info {
+    padding: 0px 10px;
+  }
+  
+  .button-column {
+    flex: 0 0 auto;
+    display: flex;
+    border-radius: 5px;
+    flex-direction: column;
+  }
+  
+  .button-column button {
+    margin-bottom: 5px;
+  }
+
+.center{
+  text-align: center;
+  vertical-align: middle;
+  padding: 5px;
+  }
+  .details{
+    padding: 1px;
+  }
+
+  .clickable-text {
+    cursor: pointer;
+    font-size: 18px;
+    color: #333; /* Change the color to your preference */
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 5px; /* Adjust the spacing between the texts if needed */
+  }
+  
+  .clickable-text:hover {
+    color: #555; /* Change the color when hovered if desired */
+  }
+  .fifth-section {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff; /* Set the background color as needed */
+    border-top: 1px solid #ccc; /* Add a border if desired */
+    padding: 10px 0; /* Adjust padding as needed */
+    text-align: center;
+  }
+
+  .task-list-container {
+    height: 300px; /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrollbar */
+    position: relative;
+  }
+  .top-widgets{
+    top: 0px;
+    position: fixed;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px 0;
+  }
+.section1 {
+  /* Other section styles */
+  position: relative;
+  z-index: 40; /* Ensure other sections appear below the task list */
+}
+.clear { 
+  clear: both; height: 150px; 
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 60%;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  padding: 30px;
+  z-index: 9999;
+  overflow-y: auto;
+}
+.sidebar-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.add-category {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* CSS for the modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+/* CSS for the modal content */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Additional styles for the search bar */
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.centered-text {
+  align-items: center;
+  text-align: center; /* Center the text horizontally */
+}
+
+  
+  

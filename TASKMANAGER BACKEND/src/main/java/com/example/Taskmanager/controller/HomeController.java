@@ -1,15 +1,21 @@
 package com.example.Taskmanager.controller;
 
 import com.example.Taskmanager.dto.TaskStatisticsDTO;
+import com.example.Taskmanager.entity.TasksEntity;
 import com.example.Taskmanager.entity.UsersEntity;
 import com.example.Taskmanager.service.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.naming.directory.SearchResult;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3001/")
 @RequestMapping("/api/home")
 public class HomeController {
 
@@ -25,13 +31,13 @@ public class HomeController {
         TaskStatisticsDTO taskStatistics = taskService.getTaskStatistics(user);
         return ResponseEntity.ok(taskStatistics);
     }
+    @GetMapping("/search")
+    public List<TasksEntity> search(@AuthenticationPrincipal UsersEntity user,@RequestParam String query) {
 
-    // Endpoint to retrieve a list of tasks
-//    @GetMapping("/tasks")
-//    public ResponseEntity<List<TasksEntity>> getTasks() {
-//        List<TasksEntity> tasks = taskService.getAllTasks();
-//        return ResponseEntity.ok(tasks);
-//    }
+        List<TasksEntity> results = taskService.search(user,query);
+
+        return results;
+    }
 
 }
 

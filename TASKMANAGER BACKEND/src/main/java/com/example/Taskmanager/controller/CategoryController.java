@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3001/")
 @RequestMapping("/api/categories")
 public class CategoryController {
 
@@ -57,15 +58,13 @@ public class CategoryController {
                 if(associateduser.equals(user)){
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
                 }
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-            } else {
+            }
                 // Create a new category if it doesn't exist
                 Category = new CategoryNamesEntity();
                 Category.setName(title);
                 Category.setUser(user);
                 // Save the new category
                 Category = categoryNamesRepository.save(Category);
-            }
 
 
 
@@ -86,11 +85,11 @@ public class CategoryController {
     }
 
     @PutMapping("/{categoryName}")
-    public ResponseEntity<String> editCategoryName(@PathVariable String categoryName,
+    public ResponseEntity<String> editCategoryName(@AuthenticationPrincipal UsersEntity user,@PathVariable String categoryName,
             @RequestParam String newTitle) {
 
-        Optional<CategoryNamesEntity> category=categoryNamesRepository.findByName(categoryName);
-        CategoryNamesEntity retrievedCategory=category.get();
+        CategoryNamesEntity category=categoryNamesRepository.findByNameAndUser(categoryName,user);
+        CategoryNamesEntity retrievedCategory=category;
         retrievedCategory.setName(newTitle);
         categoryNamesRepository.save(retrievedCategory);
         return ResponseEntity.ok("Category name updated successfully");

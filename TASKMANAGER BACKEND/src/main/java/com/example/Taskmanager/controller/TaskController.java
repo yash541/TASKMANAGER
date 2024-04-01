@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3001/")
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
@@ -25,7 +26,7 @@ public class TaskController {
     }
 
     @GetMapping("/")
-    public List<TasksEntity> getAllTasks(@AuthenticationPrincipal UsersEntity user,
+    public ResponseEntity<List<TasksEntity>> getAllTasks(@AuthenticationPrincipal UsersEntity user,
                                          @RequestParam(required = false) String priority,
                                          @RequestParam(required = false) String status,
                                          @RequestParam(required = false) String category,
@@ -35,9 +36,10 @@ public class TaskController {
                                          @RequestParam(required = false) Long pagenum) {
 
         //        Long userId, Long categoryId, Date fromDate, Date toDate, String status, String priority
-        return taskService.getAllTasks(user,priority,status,category,fromdate,todate,sort,pagenum);
+        List<TasksEntity> retrivedtasks=taskService.getAllTasks(user,priority,status,category,fromdate,todate,sort,pagenum);
+        return ResponseEntity.ok(retrivedtasks);
     }
-
+    @CrossOrigin(origins = "http://localhost:3001/")
     @PostMapping("/")
     public ResponseEntity<TasksEntity> createTask(@AuthenticationPrincipal UsersEntity user,
             @RequestBody TaskDTO taskDTO) {
@@ -64,16 +66,16 @@ public class TaskController {
         return ResponseEntity.ok(completedTaskDto);
     }
 
-    @PatchMapping("/{taskId}")
-    public ResponseEntity<TasksEntity> updateTask(@PathVariable Long taskId,@RequestBody TaskDTO taskFields) {
-        TasksEntity updatedTask = taskService.updateTask(taskId, taskFields);
+    @PostMapping("/{taskid}")
+    public ResponseEntity<TasksEntity> updateTask(@PathVariable Long taskid,@RequestBody TaskDTO taskFields) {
+        TasksEntity updatedTask = taskService.updateTask(taskid, taskFields);
         return new ResponseEntity<>(updatedTask, HttpStatus.OK);
     }
 
     @DeleteMapping("/{taskId}")
-    public ResponseEntity<Void> deleteTask(@PathVariable Long taskId) {
+    public ResponseEntity<String> deleteTask(@PathVariable Long taskId) {
         if (taskService.deleteTask(taskId)) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body("Delete Success!");
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

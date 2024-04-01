@@ -21,13 +21,13 @@ public class AuthController {
 
     private final UserService userService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3001/")
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginDTO request) {
         return ResponseEntity.ok(userService.authenticate(request));
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3001/")
     @PostMapping("/register")
     public ResponseEntity<AuthResponseDTO> register(@RequestBody RegisterDto request) {
         return ResponseEntity.ok(userService.register(request));

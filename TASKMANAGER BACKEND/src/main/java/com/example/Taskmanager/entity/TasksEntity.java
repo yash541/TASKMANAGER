@@ -29,7 +29,8 @@ public class TasksEntity{
     private Date dueDate;
     @Column(name = "completedat")
     private Date completedAt;
-
+    @Column(name = "updatedat")
+    private Date updatedat;
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private CategoryNamesEntity category;

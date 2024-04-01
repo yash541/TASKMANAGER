@@ -14,4 +14,5 @@ public interface CategoryNamesRepository extends JpaRepository<CategoryNamesEnti
 
     List<CategoryNamesEntity> findByUser(UsersEntity user);
     // You can define custom query methods here if needed
+    CategoryNamesEntity findByNameAndUser(String name,UsersEntity user);
 }
