@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="133606ff-c99a-47af-837c-f397e954f193" name="Changes" comment="PROJECT">
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/asset-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/static/css/main.96d85d15.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/static/css/main.96d85d15.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/static/js/main.343343aa.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/static/js/main.343343aa.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/build/static/js/main.343343aa.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TASKMANAGER CLIENT/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../TASKMANAGER CLIENT/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
